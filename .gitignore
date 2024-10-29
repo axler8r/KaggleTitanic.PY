@@ -1,0 +1,25 @@
+# General
+data/
+
+# Python
+__pycache__/
+.ipynb_checkpoints
+profile_default/
+ipython_config.py
+.venv/
+.env
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Elixir
+/_build
+/cover
+/deps
+/doc
+/.fetch
+erl_crash.dump
+*.ez
+*.beam
+/config/*.secret.exs
+.elixir_ls/

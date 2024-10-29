@@ -1,0 +1,28 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "files.exclude": {
+            "**/.DS_Store": true,
+            "**/.ipynb_checkpoints": true,
+            "**/.mypy_cache": true,
+            "**/.pytest_cache": true,
+            "**/Thumbs.db": true,
+            "**/__pycache__": true,
+            "**/tags": true,
+            "**/tags.lock": true,
+            "**/tags.temp": true,
+        },
+        "material-icon-theme.files.associations": {
+            "pyproject.toml": "settings",
+            "poetry.lock": "lock",
+        },
+        "material-icon-theme.folders.associations": {
+            "kaggletitanic": "python",
+            "documentation": "markdown",
+        },
+    }
+}
