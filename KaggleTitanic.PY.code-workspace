@@ -21,8 +21,14 @@
             "poetry.lock": "lock",
         },
         "material-icon-theme.folders.associations": {
-            "kaggletitanic": "python",
+            "titanic": "python",
             "documentation": "markdown",
+            ".attic": "archive",
+        },
+        "workbench.editorAssociations": {
+            "*.copilotmd": "vscode.markdown.preview.editor",
+            "*.ipynb": "jupyter-notebook",
+            "file:/**/*.csv": "jupyter-data-wrangler"
         },
     }
 }

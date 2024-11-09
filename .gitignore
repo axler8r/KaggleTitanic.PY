@@ -1,5 +1,7 @@
 # General
+.attic/
 data/
+*.png
 
 # Python
 __pycache__/

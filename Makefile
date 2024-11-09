@@ -17,6 +17,7 @@ TST_DIR = test
 		clean-all clean-resources clean-logs clean-output clean-runfiles \
 		check check-test                                                 \
 		test test-verbose                                                \
+		start-notebook list-notebook stop-notebook                       \
 		help
 
 # targets
@@ -87,6 +88,18 @@ changelog:
 	@echo "Releasing $(PROJECT_NAME)..."
 	git cliff --bump
 
+start-notebook:
+	@echo "Starting Jupyter Notebook..."
+	nohup jupyter lab --no-browser --port 18080 > output/jupyter-lab.out &
+
+list-notebook:
+	@echo "Listing Jupyter Notebook..."
+	jupyter notebook list
+
+stop-notebook:
+	@echo "Stopping Jupyter Notebook..."
+	jupyter notebook stop 18080
+
 help:
 	@echo "Usage: make [target]"
 	@echo "Targets:"
@@ -106,4 +119,7 @@ help:
 	@echo "  test:            Test the project"
 	@echo "  test-verbose:    Test the project with verbose output"
 	@echo "  changelog:       Update the changelog"
+	@echo "  start-notebook:  Start Jupyter Notebook"
+	@echo "  list-notebook:   List Jupyter Notebook"
+	@echo "  stop-notebook:   Stop Jupyter Notebook"
 	@echo "  help:            Show this help message"
