@@ -1,5 +1,6 @@
-# General
+# Project
 .attic/
+output/
 data/
 *.png
 
