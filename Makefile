@@ -2,7 +2,7 @@
 PYTHON = python3
 
 # location aliases
-PROJECT_NAME = kaggletitanic
+PROJECT_NAME = titanic
 SRC_DIR = $(PROJECT_NAME)
 DOC_DIR = documentation
 IPYNB_DIR = notebook
