@@ -55,15 +55,25 @@ clean-resources:
 
 clean-all: clean-runfiles clean-output clean-logs clean-resources
 
-format:
+format-source:
 	@echo "Formatting $(PROJECT_NAME)..."
 	$(PYTHON) -m autoflake          \
 		--remove-all-unused-imports \
 		--remove-unused-variables   \
 		--in-place                  \
-		--recursive $(SRC_DIR) $(TST_DIR) $(IPYNB_DIR)
-	$(PYTHON) -m isort $(SRC_DIR) $(TST_DIR) $(IPYNB_DIR)
-	$(PYTHON) -m black $(SRC_DIR) $(TST_DIR) $(IPYNB_DIR)
+		--recursive $(SRC_DIR) $(TST_DIR)
+	$(PYTHON) -m isort $(SRC_DIR) $(TST_DIR)
+	$(PYTHON) -m black $(SRC_DIR) $(TST_DIR)
+
+format-notebook:
+	@echo "Formatting $(PROJECT_NAME)..."
+	$(PYTHON) -m autoflake          \
+		--remove-all-unused-imports \
+		--remove-unused-variables   \
+		--in-place                  \
+		--recursive $(IPYNB_DIR)
+	$(PYTHON) -m isort $(IPYNB_DIR)
+	$(PYTHON) -m black --line-length=120 $(IPYNB_DIR)
 
 check:
 	@echo "Checking $(PROJECT_NAME)..."
