@@ -18,7 +18,10 @@
         },
         "material-icon-theme.files.associations": {
             "pyproject.toml": "settings",
+            "poetry.toml": "settings",
             "poetry.lock": "lock",
+            "*.parquet": "database",
+
         },
         "material-icon-theme.folders.associations": {
             "titanic": "python",
