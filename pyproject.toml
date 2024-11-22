@@ -30,6 +30,8 @@ isort = "^5.13.2"
 mypy = "^1.13.0"
 git-cliff = "^2.6.1"
 pytest = "^8.3.3"
+nbstripout = "^0.8.1"
+nbconvert = "^7.16.4"
 
 [build-system]
 requires = ["poetry-core"]
