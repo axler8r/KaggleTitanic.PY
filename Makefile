@@ -18,6 +18,7 @@ TST_DIR = test
 		check check-test                                                 \
 		test test-verbose                                                \
 		start-notebook list-notebook stop-notebook                       \
+		open-links                                                       \
 		help
 
 # targets
@@ -109,6 +110,16 @@ list-notebook:
 stop-notebook:
 	@echo "Stopping Jupyter Notebook..."
 	jupyter notebook stop 18080
+
+open-links:
+	@echo "Opening links..."
+	brave --new-window                   \
+		--new-tab numpy.org              \
+		--new-tab pola.rs                \
+		--new-tab scikit-learn.org       \
+		--new-tab seaborn.pydata.org     \
+		--new-tab xgboost.readthedocs.io \
+		--new-tab pytorch.org
 
 help:
 	@echo "Usage: make [target]"
