@@ -9,6 +9,7 @@ __pycache__/
 .ipynb_checkpoints
 profile_default/
 ipython_config.py
+.conda/
 .venv/
 .env
 .mypy_cache/
@@ -26,3 +27,4 @@ erl_crash.dump
 *.beam
 /config/*.secret.exs
 .elixir_ls/
+
