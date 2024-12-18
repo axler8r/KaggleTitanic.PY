@@ -13,7 +13,7 @@ TST_DIR = test
 
 # phony targets
 .PHONY: all                                                              \
-		activate deactivate reactivate                                   \
+		conda-create conda-activate conda-deactivate 					 \
 		clean-all clean-resources clean-logs clean-output clean-runfiles \
 		check check-test                                                 \
 		test test-verbose                                                \
@@ -22,24 +22,36 @@ TST_DIR = test
 		help
 
 # targets
-all: format check test
+conda-create:
+	@echo "Creating conda environement..."
+	conda create               \
+		--prefix=$(pwd)/.conda \
+		python=3.12            \
+		autoflake              \
+		conda-forge::git-cliff \
+		conda-forge::polars    \
+		git-cliff              \
+		ipykernel              \
+		isort                  \
+		kaggle                 \
+		mypy                   \
+		nbstripout			   \
+		numpy                  \
+		pandas black           \
+		pytest                 \
+		python-dotenv          \
+		pytorch                \
+		scikit-learn           \
+		seaborn                \
+		xgboost
 
-init: activate
-	@echo "Initializing $(PROJECT_NAME)..."
-	mkdir doc log out res
-	poetry install
+conda-activate:
+	@echo "Activating conda environment..."
+	conda activate $(pwd)/.conda
 
-activate:
-	@echo "Activating poetry shell..."
-	poetry shell
-
-reactivate:
-	@echo "Reactivating existing poetry shell..."
-	bash -c "source $(shell poetry env info --path)/bin/activate"
-
-deactivate:
-	@echo "Deactivating existing poetry shell..."
-	deactivate
+conda-deactivate:
+	@echo "Deactivating conda environment..."
+	conda deactivate
 
 clean-runfiles:
 	rm -rf **/__pycache__
