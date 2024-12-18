@@ -4,17 +4,18 @@ PYTHON = python3
 # location aliases
 PROJECT_NAME = titanic
 SRC_DIR = $(PROJECT_NAME)
-DOC_DIR = documentation
-IPYNB_DIR = notebook
+DOC_DIR = doc
+IPYNB_DIR = ipynb
 LOG_DIR = log
-OUT_DIR = output
-RES_DIR = resource
+OUT_DIR = out
+RES_DIR = res
 TST_DIR = test
 
 # phony targets
 .PHONY: all                                                              \
 		conda-create conda-activate conda-deactivate 					 \
 		clean-all clean-resources clean-logs clean-output clean-runfiles \
+		format format-source format-notebook                             \
 		check check-test                                                 \
 		test test-verbose                                                \
 		start-notebook list-notebook stop-notebook                       \
@@ -22,6 +23,8 @@ TST_DIR = test
 		help
 
 # targets
+all: format check check-test test
+
 conda-create:
 	@echo "Creating conda environement..."
 	conda create               \
@@ -88,6 +91,8 @@ format-notebook:
 	$(PYTHON) -m isort $(IPYNB_DIR)
 	$(PYTHON) -m black --line-length=120 $(IPYNB_DIR)
 
+format: format-source format-notebook
+
 check:
 	@echo "Checking $(PROJECT_NAME)..."
 	$(PYTHON) -m mypy            \
@@ -136,23 +141,22 @@ open-links:
 help:
 	@echo "Usage: make [target]"
 	@echo "Targets:"
-	@echo "  all:             Format, check, and test the project"
-	@echo "  init:            Initialize the project"
-	@echo "  activate:        Activate poetry shell"
-	@echo "  reactivate:      Reactivate the existing poetry shell"
-	@echo "  deactivate:      Deactivate the existing poetry shell"
-	@echo "  clean-all:       Clean all generated files"
-	@echo "  clean-resources: Clean resource files"
-	@echo "  clean-logs:      Clean log files"
-	@echo "  clean-output:    Clean output files"
-	@echo "  clean-runfiles:  Clean run files"
-	@echo "  format:          Format the project"
-	@echo "  check:           Check implementation"
-	@echo "  check-tests:     Check tests"
-	@echo "  test:            Test the project"
-	@echo "  test-verbose:    Test the project with verbose output"
-	@echo "  changelog:       Update the changelog"
-	@echo "  start-notebook:  Start Jupyter Notebook"
-	@echo "  list-notebook:   List Jupyter Notebook"
-	@echo "  stop-notebook:   Stop Jupyter Notebook"
-	@echo "  help:            Show this help message"
+	@echo "  all:              Format, check, and test the project"
+	@echo "  conda-create:     Setup conda environment"
+	@echo "  conda-activate:   Activate poetry shell"
+	@echo "  conda-deactivate: Deactivate the existing poetry shell"
+	@echo "  clean-all:        Clean all generated files"
+	@echo "  clean-resources:  Clean resource files"
+	@echo "  clean-logs:       Clean log files"
+	@echo "  clean-output:     Clean output files"
+	@echo "  clean-runfiles:   Clean run files"
+	@echo "  format:           Format the project"
+	@echo "  check:            Check implementation"
+	@echo "  check-tests:      Check tests"
+	@echo "  test:             Test the project"
+	@echo "  test-verbose:     Test the project with verbose output"
+	@echo "  changelog:        Update the changelog"
+	@echo "  start-notebook:   Start Jupyter Notebook"
+	@echo "  list-notebook:    List Jupyter Notebook"
+	@echo "  stop-notebook:    Stop Jupyter Notebook"
+	@echo "  help:             Show this help message"
