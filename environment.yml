@@ -1,4 +1,4 @@
-name: /home/axl/Projects/AxlER8R/KaggleTitanic.PY/.conda
+name: ./.conda
 channels:
   - conda-forge
   - defaults
@@ -160,4 +160,4 @@ dependencies:
   - xorg-libxdmcp=1.1.5=hb9d3cd8_0
   - zeromq=4.3.5=h6a678d5_0
   - zstd=1.5.6=ha6fb4c9_0
-prefix: /home/axl/Projects/AxlER8R/KaggleTitanic.PY/.conda
+prefix: ./.conda

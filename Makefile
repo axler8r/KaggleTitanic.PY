@@ -28,7 +28,7 @@ all: format check check-test test
 conda-create:
 	@echo "Creating conda environement..."
 	conda create               \
-		--prefix=$(pwd)/.conda \
+		--prefix=./.conda      \
 		python=3.12            \
 		autoflake              \
 		conda-forge::git-cliff \
@@ -50,7 +50,7 @@ conda-create:
 
 conda-activate:
 	@echo "Activating conda environment..."
-	conda activate $(pwd)/.conda
+	conda activate ./.conda
 
 conda-deactivate:
 	@echo "Deactivating conda environment..."
