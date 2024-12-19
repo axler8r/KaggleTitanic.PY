@@ -38,7 +38,7 @@ conda-create:
 		isort                  \
 		kaggle                 \
 		mypy                   \
-		nbstripout			   \
+		nbstripout             \
 		numpy                  \
 		pandas black           \
 		pytest                 \
