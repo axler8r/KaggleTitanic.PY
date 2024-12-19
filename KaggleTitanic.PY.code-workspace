@@ -17,16 +17,14 @@
             "**/tags.temp": true,
         },
         "material-icon-theme.files.associations": {
-            "pyproject.toml": "settings",
-            "poetry.toml": "settings",
-            "poetry.lock": "lock",
             "*.parquet": "database",
 
         },
         "material-icon-theme.folders.associations": {
             "titanic": "python",
-            "documentation": "markdown",
+            "doc": "markdown",
             ".attic": "archive",
+            ".conda": "components",
         },
         "workbench.editorAssociations": {
             "*.copilotmd": "vscode.markdown.preview.editor",
