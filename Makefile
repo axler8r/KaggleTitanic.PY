@@ -12,14 +12,14 @@ RES_DIR = res
 TST_DIR = test
 
 # phony targets
-.PHONY: all                                                              \
-		conda-create conda-export conda-activate conda-deactivate        \
-		clean-all clean-resources clean-logs clean-output clean-runfiles \
-		format format-source format-notebook                             \
-		check check-test                                                 \
-		test test-verbose                                                \
-		start-notebook list-notebook stop-notebook                       \
-		open-docs                                                        \
+.PHONY: all                                                                    \
+		conda-create conda-update conda-export conda-activate conda-deactivate \
+		clean-all clean-resources clean-logs clean-output clean-runfiles       \
+		format format-source format-notebook                                   \
+		check check-test                                                       \
+		test test-verbose                                                      \
+		start-notebook list-notebook stop-notebook                             \
+		open-docs                                                              \
 		help
 
 # targets
@@ -28,6 +28,10 @@ all: format check check-test test
 conda-create:
 	@echo "Creating conda environement..."
 	conda env create --prefix ./.conda --file environment.yml
+
+conda-update:
+	@echo "Updating conda environment..."
+	conda env update --prefix ./.conda --file environment.yml
 
 conda-export:
 	@echo "Exporting conda environment..."
@@ -129,6 +133,7 @@ help:
 	@echo "Targets:"
 	@echo "  all:              Format, check, and test the project"
 	@echo "  conda-create:     Setup conda environment"
+	@echo "  conda-update:     Update conda environment"
 	@echo "  conda-export:     Export conda environment"
 	@echo "  conda-activate:   Activate poetry shell"
 	@echo "  conda-deactivate: Deactivate the existing poetry shell"
