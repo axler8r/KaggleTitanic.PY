@@ -139,7 +139,7 @@ help:
 	@echo "  clean-runfiles:   Clean run files"
 	@echo "  format:           Format the project"
 	@echo "  check:            Check implementation"
-	@echo "  check-tests:      Check tests"
+	@echo "  check-test:       Check tests"
 	@echo "  test:             Test the project"
 	@echo "  test-verbose:     Test the project with verbose output"
 	@echo "  changelog:        Update the changelog"
