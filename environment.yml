@@ -1,14 +1,17 @@
 channels:
-  - conda-forge
   - defaults
+  - conda-forge
+  - https://repo.anaconda.com/pkgs/main
+  - https://repo.anaconda.com/pkgs/r
 dependencies:
   - _libgcc_mutex=0.1=conda_forge
   - _openmp_mutex=4.5=2_gnu
   - _py-xgboost-mutex=2.0=cpu_0
   - asttokens=2.0.5=pyhd3eb1b0_0
-  - attrs=24.2.0=py312h06a4308_0
+  - attrs=24.3.0=py312h06a4308_0
   - autoflake=1.7.5=pyhd8ed1ab_0
-  - black=24.8.0=py312h06a4308_0
+  - black=24.10.0=py312h7900ff3_0
+  - black-jupyter=24.10.0=hd8ed1ab_0
   - blas=1.0=openblas
   - bleach=6.2.0=py312h06a4308_0
   - bottleneck=1.4.2=py312ha883a20_0
@@ -34,7 +37,7 @@ dependencies:
   - idna=3.7=py312h06a4308_0
   - iniconfig=1.1.1=pyhd3eb1b0_0
   - ipykernel=6.29.5=py312h06a4308_0
-  - ipython=8.27.0=py312h06a4308_0
+  - ipython=8.30.0=py312h06a4308_0
   - isort=5.13.2=py312h06a4308_0
   - jedi=0.19.2=py312h06a4308_0
   - jinja2=3.1.4=py312h06a4308_1
@@ -142,6 +145,7 @@ dependencies:
   - text-unidecode=1.3=pyhd3eb1b0_0
   - threadpoolctl=3.5.0=py312he106c6f_0
   - tk=8.6.13=noxft_h4845f30_101
+  - tokenize-rt=6.1.0=pyhd8ed1ab_1
   - tornado=6.4.2=py312h5eee18b_0
   - tqdm=4.66.5=py312he106c6f_0
   - traitlets=5.14.3=py312h06a4308_0
