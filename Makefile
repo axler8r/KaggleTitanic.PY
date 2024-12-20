@@ -115,7 +115,7 @@ stop-notebook:
 
 open-docs:
 	@echo "Opening documentation..."
-	xdg-open --new-window                                                              \
+	brave --new-window                                                                 \
 		--new-tab https://docs.conda.io/projects/conda/en/latest/user-guide/index.html \
 		--new-tab https://numpy.org/doc/stable                                         \
 		--new-tab https://docs.pola.rs/user-guide                                      \
