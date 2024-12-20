@@ -13,7 +13,7 @@ TST_DIR = test
 
 # phony targets
 .PHONY: all                                                              \
-		conda-create conda-activate conda-deactivate 					 \
+		conda-create conda-export conda-activate conda-deactivate        \
 		clean-all clean-resources clean-logs clean-output clean-runfiles \
 		format format-source format-notebook                             \
 		check check-test                                                 \
@@ -27,30 +27,15 @@ all: format check check-test test
 
 conda-create:
 	@echo "Creating conda environement..."
-	conda create               \
-		--prefix=$(pwd)/.conda \
-		python=3.12            \
-		autoflake              \
-		conda-forge::git-cliff \
-		conda-forge::polars    \
-		git-cliff              \
-		ipykernel              \
-		isort                  \
-		kaggle                 \
-		mypy                   \
-		nbstripout			   \
-		numpy                  \
-		pandas black           \
-		pytest                 \
-		python-dotenv          \
-		pytorch                \
-		scikit-learn           \
-		seaborn                \
-		xgboost
+	conda env create --prefix ./.conda --file environment.yml
+
+conda-export:
+	@echo "Exporting conda environment..."
+	conda env export --prefix ./.conda > environment.yml
 
 conda-activate:
 	@echo "Activating conda environment..."
-	conda activate $(pwd)/.conda
+	conda activate ./.conda
 
 conda-deactivate:
 	@echo "Deactivating conda environment..."
@@ -143,6 +128,7 @@ help:
 	@echo "Targets:"
 	@echo "  all:              Format, check, and test the project"
 	@echo "  conda-create:     Setup conda environment"
+	@echo "  conda-export:     Export conda environment"
 	@echo "  conda-activate:   Activate poetry shell"
 	@echo "  conda-deactivate: Deactivate the existing poetry shell"
 	@echo "  clean-all:        Clean all generated files"
