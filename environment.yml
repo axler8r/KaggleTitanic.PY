@@ -1,4 +1,3 @@
-name: KaggleTitanic.PY
 channels:
   - conda-forge
   - defaults
