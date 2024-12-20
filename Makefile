@@ -19,7 +19,7 @@ TST_DIR = test
 		check check-test                                                 \
 		test test-verbose                                                \
 		start-notebook list-notebook stop-notebook                       \
-		open-links                                                       \
+		open-docs                                                        \
 		help
 
 # targets
@@ -113,15 +113,16 @@ stop-notebook:
 	@echo "Stopping Jupyter Notebook..."
 	jupyter notebook stop 18080
 
-open-links:
-	@echo "Opening links..."
-	brave --new-window                   \
-		--new-tab numpy.org              \
-		--new-tab pola.rs                \
-		--new-tab scikit-learn.org       \
-		--new-tab seaborn.pydata.org     \
-		--new-tab xgboost.readthedocs.io \
-		--new-tab pytorch.org
+open-docs:
+	@echo "Opening documentation..."
+	xdg-open --new-window                                                              \
+		--new-tab https://docs.conda.io/projects/conda/en/latest/user-guide/index.html \
+		--new-tab https://numpy.org/doc/stable                                         \
+		--new-tab https://docs.pola.rs/user-guide                                      \
+		--new-tab https://devdocs.io/scikit_learn                                      \
+		--new-tab http://seaborn.pydata.org/tutorial.html                              \
+		--new-tab https://xgboost.readthedocs.io/en/stable                             \
+		--new-tab https://pytorch.org/docs
 
 help:
 	@echo "Usage: make [target]"
@@ -145,4 +146,5 @@ help:
 	@echo "  start-notebook:   Start Jupyter Notebook"
 	@echo "  list-notebook:    List Jupyter Notebook"
 	@echo "  stop-notebook:    Stop Jupyter Notebook"
+	@echo "  open-docs:        Open documentation links"
 	@echo "  help:             Show this help message"
