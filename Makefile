@@ -13,29 +13,21 @@ TST_DIR = test
 
 # phony targets
 .PHONY: all                                                                    \
-		conda-create conda-update conda-export conda-activate conda-deactivate \
-		clean-all clean-resources clean-logs clean-output clean-runfiles       \
-		format format-source format-notebook                                   \
-		check check-test                                                       \
+		conda-create conda-activate conda-deactivate conda-update conda-export \
+		clean-cache clean-log clean-output clean-resource clean                \
+		format-notebook format-source format-test format                       \
+		check-notebook check-source check-test check                           \
 		test test-verbose                                                      \
 		start-notebook list-notebook stop-notebook                             \
-		open-docs                                                              \
+		open-doc                                                               \
 		help
 
 # targets
-all: format check check-test test
+all: format check test
 
 conda-create:
 	@echo "Creating conda environement..."
 	conda env create --prefix ./.conda --file environment.yml
-
-conda-update:
-	@echo "Updating conda environment..."
-	conda env update --prefix ./.conda --file environment.yml
-
-conda-export:
-	@echo "Exporting conda environment..."
-	conda env export --prefix ./.conda > environment.yml
 
 conda-activate:
 	@echo "Activating conda environment..."
@@ -45,30 +37,30 @@ conda-deactivate:
 	@echo "Deactivating conda environment..."
 	conda deactivate
 
-clean-runfiles:
+conda-update:
+	@echo "Updating conda environment..."
+	conda env update --prefix ./.conda --file environment.yml
+
+conda-export:
+	@echo "Exporting conda environment..."
+	conda env export --prefix ./.conda > environment.yml
+	sed -i '/^name/d' environment.yml
+	sed -i '/^prefix/d' environment.yml
+
+clean-cache:
 	rm -rf **/__pycache__
 	rm -rf **/.ipynb_checkpoints
+
+clean-log:
+	rm -f $(LOG_DIR)/*
 
 clean-output:
 	rm -f $(OUT_DIR)/*
 
-clean-logs:
-	rm -f $(LOG_DIR)/*
-
-clean-resources:
+clean-resource:
 	rm -f $(RES_DIR)/*
 
-clean-all: clean-runfiles clean-output clean-logs clean-resources
-
-format-source:
-	@echo "Formatting $(PROJECT_NAME)..."
-	$(PYTHON) -m autoflake          \
-		--remove-all-unused-imports \
-		--remove-unused-variables   \
-		--in-place                  \
-		--recursive $(SRC_DIR) $(TST_DIR)
-	$(PYTHON) -m isort $(SRC_DIR) $(TST_DIR)
-	$(PYTHON) -m black $(SRC_DIR) $(TST_DIR)
+clean: clean-cache clean-output clean-log clean-resource
 
 format-notebook:
 	@echo "Formatting $(PROJECT_NAME)..."
@@ -80,9 +72,33 @@ format-notebook:
 	$(PYTHON) -m isort $(IPYNB_DIR)
 	$(PYTHON) -m black --line-length=120 $(IPYNB_DIR)
 
-format: format-source format-notebook
+format-source:
+	@echo "Formatting $(PROJECT_NAME)..."
+	$(PYTHON) -m autoflake          \
+		--remove-all-unused-imports \
+		--remove-unused-variables   \
+		--in-place                  \
+		--recursive $(SRC_DIR) $(TST_DIR)
+	$(PYTHON) -m isort $(SRC_DIR) $(TST_DIR)
+	$(PYTHON) -m black $(SRC_DIR) $(TST_DIR)
 
-check:
+format-test:
+	@echo "Formatting $(PROJECT_NAME)..."
+	$(PYTHON) -m autoflake          \
+		--remove-all-unused-imports \
+		--remove-unused-variables   \
+		--in-place                  \
+		--recursive $(TST_DIR)
+	$(PYTHON) -m isort $(TST_DIR)
+	$(PYTHON) -m black $(TST_DIR)
+
+format: format-notebook format-source format-test
+
+check-notebook:
+	@echo "Checking $(PROJECT_NAME)..."
+	@echo "Not implemented yet..."
+
+check-source:
 	@echo "Checking $(PROJECT_NAME)..."
 	$(PYTHON) -m mypy            \
 		--check-untyped-defs     \
@@ -93,13 +109,15 @@ check-test:
 	@echo "Checking $(PROJECT_NAME)..."
 	$(PYTHON) -m mypy $(TST_DIR)
 
-test:
-	@echo "Testing $(TST_DIR)..."
-	$(PYTHON) -m pytest $(TST_DIR)
+check: check-notebook check-source check-test
 
 test-verbose:
 	@echo "Testing $(TST_DIR)..."
 	$(PYTHON) -m pytest --verbose $(TST_DIR)
+
+test:
+	@echo "Testing $(TST_DIR)..."
+	$(PYTHON) -m pytest $(TST_DIR)
 
 changelog:
 	@echo "Releasing $(PROJECT_NAME)..."
@@ -117,7 +135,7 @@ stop-notebook:
 	@echo "Stopping Jupyter Notebook..."
 	jupyter notebook stop 18080
 
-open-docs:
+open-doc:
 	@echo "Opening documentation..."
 	brave --new-window                                                                 \
 		--new-tab https://docs.conda.io/projects/conda/en/latest/user-guide/index.html \
@@ -137,19 +155,24 @@ help:
 	@echo "  conda-export:     Export conda environment"
 	@echo "  conda-activate:   Activate poetry shell"
 	@echo "  conda-deactivate: Deactivate the existing poetry shell"
-	@echo "  clean-all:        Clean all generated files"
-	@echo "  clean-resources:  Clean resource files"
-	@echo "  clean-logs:       Clean log files"
+	@echo "  clean-resource:   Clean resource files"
+	@echo "  clean-log:        Clean log files"
 	@echo "  clean-output:     Clean output files"
-	@echo "  clean-runfiles:   Clean run files"
+	@echo "  clean-cache:      Clean run files"
+	@echo "  clean:            Clean all generated files"
+	@echo "  format-source:    Check source"
+	@echo "  format-notebook:  Check notebook"
+	@echo "  format-test:      Check test"
 	@echo "  format:           Format the project"
-	@echo "  check:            Check implementation"
-	@echo "  check-test:       Check tests"
-	@echo "  test:             Test the project"
+	@echo "  check-source:     Check source"
+	@echo "  check-notebook:   Check notebook"
+	@echo "  check-test:       Check test"
+	@echo "  check:            Check all"
 	@echo "  test-verbose:     Test the project with verbose output"
+	@echo "  test:             Test the project"
 	@echo "  changelog:        Update the changelog"
 	@echo "  start-notebook:   Start Jupyter Notebook"
 	@echo "  list-notebook:    List Jupyter Notebook"
 	@echo "  stop-notebook:    Stop Jupyter Notebook"
-	@echo "  open-docs:        Open documentation links"
+	@echo "  open-doc:         Open documentation links"
 	@echo "  help:             Show this help message"
