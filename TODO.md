@@ -4,8 +4,6 @@ Project Description
 
 ### Do
 
-- [ ] Retrain models  
-- [ ] Save model to file  
 - [ ] Document model architecture  
 - [ ] Implement Neural Network  
 
@@ -14,5 +12,7 @@ Project Description
 
 ### Done ✓
 
+- [x] Save model to file  
+- [x] Retrain models  
 - [x] Refine data preprocessing  
 
